@@ -13,9 +13,10 @@ SOLVED:
 31.05 - 809
 01.06 - 833
 02.06 - 849
+03.06 - 23
 
 WITH HELP:
 43,849
 
 NEED ATTENTION:
-3,11,43,849
+3,11,43,849,23(divide_and_conquer)
