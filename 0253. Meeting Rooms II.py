@@ -2,18 +2,18 @@ from typing import *
 
 class Solution:
     def minMeetingRooms(self, intervals: List[List[int]]) -> int:
-        import heapq
+        if not intervals:
+            return 0
         
-        intervals.sort(key=lambda x: x[0])
-        rooms = []
+        rooms = 0
+        starts = sorted([x[0] for x in intervals])
+        ends = sorted([x[1] for x in intervals])
+        e_ptr = 0
         
-        for s, e in intervals:
-            # current interval can replace soon ending meeting
-            # no additional room required
-            if rooms and s >= rooms[0]:
-                heapq.heappop(rooms)
-                heapq.heappush(rooms, e)
+        for s_ptr in range(len(starts)):
+            if starts[s_ptr] >= ends[e_ptr]:
+                e_ptr += 1
             else:
-                heapq.heappush(rooms, e)
+                rooms += 1
         
-        return len(rooms)
+        return rooms
