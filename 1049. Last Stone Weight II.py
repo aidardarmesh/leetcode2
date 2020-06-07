@@ -5,8 +5,10 @@ class Solution:
         n, S = len(stones), sum(stones)
         S2 = S // 2
         dp = [[False for _ in range(S2+1)] for __ in range(n+1)]
-        dp[0][0] = True
         max_S = 0
+
+        for i in range(n+1):
+            dp[i][0] = True
         
         for i in range(1, n+1):
             for s in range(1, S2+1):
