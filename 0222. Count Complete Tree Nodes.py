@@ -8,24 +8,46 @@ from typing import *
 #         self.right = right
 class Solution:
     def countNodes(self, root: TreeNode) -> int:
-        from collections import deque
-        
-        deq, cnt = deque(), 0
-        
-        if root:
-            deq.append(root)
-        
-        while deq:
-            size = len(deq)
+        def depth(node):
+            d = 0
             
-            for _ in range(size):
-                node = deq.popleft()
-                cnt += 1
-                
-                if node.left:
-                    deq.append(node.left)
-                
-                if node.right:
-                    deq.append(node.right)
+            while node.left:
+                node = node.left
+                d += 1
             
-        return cnt
+            return d
+        
+        def exists(idx, d, node):
+            left, right = 0, 2**d - 1
+            
+            for _ in range(d):
+                pivot = left + (right-left)//2
+                
+                if idx <= pivot:
+                    node = node.left
+                    right = pivot
+                else:
+                    node = node.right
+                    left = pivot + 1
+                
+            return node is not None
+        
+        if not root:
+            return 0
+        
+        d = depth(root)
+        
+        if d == 0:
+            return 1
+        
+        left, right = 0, 2**d - 1
+        
+        while left <= right:
+            pivot = left + (right-left)//2
+            
+            if exists(pivot, d, root):
+                left = pivot + 1
+            else:
+                right = pivot - 1
+        
+        return (2**d - 1) + left
