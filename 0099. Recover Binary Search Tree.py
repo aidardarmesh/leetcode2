@@ -11,34 +11,26 @@ class Solution:
         """
         Do not return anything, modify root in-place instead.
         """
-        def in_order(node):
-            return in_order(node.left) + [node.val] + in_order(node.right) if node else []
+        stack = []
+        x = y = pred = None
+        node = root
         
-        def find_swapped(nums):
-            x = y = -1
-            
-            for i in range(len(nums)-1):
-                if nums[i] > nums[i+1]:
-                    y = nums[i+1]
+        while stack or node:
+            if node:
+                stack.append(node)
+                node = node.left
+            else:
+                node = stack.pop()
+                
+                if pred and node.val < pred.val:
+                    y = node
                     
-                    if x == -1:
-                        x = nums[i]
+                    if not x:
+                        x = pred
                     else:
                         break
-            
-            return x, y
-        
-        def recover(root, cnt):
-            if root:
-                if root.val == x or root.val == y:
-                    root.val = y if root.val == x else x
-                    cnt -= 1
-                    
-                    if cnt == 0:
-                        return
                 
-                recover(root.left, cnt)
-                recover(root.right, cnt)
+                pred = node
+                node = node.right
         
-        x, y = find_swapped(in_order(root))
-        recover(root, 2)
+        x.val, y.val = y.val, x.val
