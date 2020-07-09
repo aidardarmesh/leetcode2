@@ -13,9 +13,14 @@ class Solution:
         if not root:
             return []
         
-        res = [root.val]
+        stack = [root]
+        res = []
         
-        for child in root.children:
-            res += self.preorder(child)
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            
+            for i in range(len(node.children)-1, -1, -1):
+                stack.append(node.children[i])
         
         return res
