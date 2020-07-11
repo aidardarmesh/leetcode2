@@ -2,20 +2,33 @@ from typing import *
 
 class Solution:
     def maxJumps(self, arr: List[int], d: int) -> int:
-        n = len(arr)
-        dp = [1]*n
+        dp = {}
         
-        for i in range(n):
-            for j in range(i-d, i):
-                if j < 0 or arr[j] >= arr[i]:
-                    break
-                
-                dp[i] = max(dp[i], dp[j]+1)
+        def dfs(arr, i, d):
+            if dp.get(i):
+                return dp[i]
             
-            for j in range(i+1, i+d+1):
-                if j >= n or arr[j] >= arr[i]:
+            res = 1
+            
+            for j in range(i-1, max(-1, i-d-1), -1):
+                if arr[j] >= arr[i]:
                     break
                 
-                dp[i] = max(dp[i], dp[j]+1)
+                res = max(res, 1 + dfs(arr, j, d))
+            
+            for j in range(i+1, min(len(arr), i+d+1), 1):
+                if arr[j] >= arr[i]:
+                    break
+                
+                res = max(res, 1 + dfs(arr, j, d))
+            
+            dp[i] = res
+            
+            return dp[i]
         
-        return max(dp)
+        ans = 1
+        
+        for i in range(len(arr)):
+            ans = max(ans, dfs(arr, i, d))
+        
+        return ans
