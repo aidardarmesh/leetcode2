@@ -19,25 +19,26 @@ class Solution:
         return ''.join(ans)
     
     def _match(self, s, p):
-        if self.memo.get((s,p)):
-            return self.memo[(s,p)]
+        idx = (s,p)
         
-        if not p:
-            return not s
+        if idx in self.memo:
+            return self.memo[idx]
         
-        first_match = bool(s) and p[0] in {s[0], '?', '*'}
-        
-        if p and p[0] == '*':
-            ans = self.isMatch(s, p[1:]) or first_match and self.isMatch(s[1:], p)
-            self.memo[(s,p)] = ans
-            return ans
+        if p == s or p == '*':
+            self.memo[idx] = True
+        elif not p or not s:
+            self.memo[idx] = False
+        elif p[0] == s[0] or p[0] == '?':
+            self.memo[idx] = self._match(s[1:], p[1:])
+        elif p[0] == '*':
+            self.memo[idx] = self._match(s[1:],p) or self._match(s,p[1:])
         else:
-            ans = first_match and self.isMatch(s[1:], p[1:])
-            self.memo[(s,p)] = ans
-            return ans
+            self.memo[idx] = False
+        
+        return self.memo[idx]
         
     def isMatch(self, s: str, p: str) -> bool:
         p = self._remove_stars(p)
         self.memo = {}
         
-        return self._match(s, p)        
+        return self._match(s, p)
