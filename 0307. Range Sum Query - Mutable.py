@@ -1,5 +1,3 @@
-from typing import *
-
 class NumArray:
 
     def __init__(self, nums: List[int]):
@@ -14,10 +12,10 @@ class NumArray:
     
     def _push(self, v, vl, vr):
         if vl != vr:
-            self.temp[2*v+1] += self.temp[v]
-            self.temp[2*v+2] += self.temp[v]
+            self.temp[2*v+1] = self.temp[v]
+            self.temp[2*v+2] = self.temp[v]
         
-        self.st[v] += self.temp[v] * (vr-vl+1)
+        self.st[v] = self.temp[v] * (vr-vl+1)
         self.temp[v] = 0
     
     def _build(self, v, vl, vr):
@@ -31,7 +29,7 @@ class NumArray:
         self.st[v] = self.st[2*v+1] + self.st[2*v+2]
     
     def _query(self, v, vl, vr, l, r):
-        self._push(v, vl, vr)
+        #self._push(v, vl, vr)
         
         if vl > r or vr < l:
             return 0
@@ -46,13 +44,12 @@ class NumArray:
         return ql + qr
     
     def _update(self, v, vl, vr, l, r, val):
-        self._push(v, vl, vr)
-        
         if vl > r or vr < l:
             return
         
         if l <= vl and vr <= r:
-            self.st[v] = val
+            self.temp[v] = val
+            self._push(v, vl, vr)
             return
         
         vm = vl + (vr-vl) // 2
