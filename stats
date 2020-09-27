@@ -130,6 +130,7 @@ SOLVED:
 25.09 - 796,41,448,442,645
 26.09 - 295
 27.09 - 
+28.09 - 445
 
 WITH HELP:
 43,849,253,1049,621,494,973,31,857,158,97,222,99,1340,10,815,44,399
@@ -150,3 +151,13 @@ Cracking (PAY ATTENTION)
 4.5 Validate BST - Min,Max
 4.7 Build Order - Topological Sort (BFS)
 4.9 BST Sequence - Trust and Focus (weaving)
+
+ByteDance
+- Backtracking
+- Graph of speed of downloading of file over time
+- Tree/Graph, System design, Course Scheduling
+- Find MaxPath in Directed Graph
+- LRU
+- https://leetcode.com/problems/add-two-numbers-ii/
+- Longest valid parenthesis substring
+- 
