@@ -131,6 +131,10 @@ SOLVED:
 26.09 - 295
 27.09 - 
 28.09 - 445,572
+29.09 - 
+30.09 - 
+01.10 - 
+02.10 - 1192
 
 WITH HELP:
 43,849,253,1049,621,494,973,31,857,158,97,222,99,1340,10,815,44,399
@@ -151,6 +155,12 @@ Cracking (PAY ATTENTION)
 4.5 Validate BST - Min,Max
 4.7 Build Order - Topological Sort (BFS)
 4.9 BST Sequence - Trust and Focus (weaving)
+4.10 Check Subtree
+4.11 Random Node
+4.12 Paths Sum
+
+8.2 - Robot in Grid - Maze
+8.3 - Magic Index - Recursive Bin.Search
 
 ByteDance
 - Backtracking
