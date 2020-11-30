@@ -3,27 +3,16 @@ from collections import deque
 
 def solution(x, y):
     x, y = int(x), int(y)
-    queue = deque()
-    queue.append((1, 1))
     gen = 0
 
-    while queue:
-        size = len(queue)
-        for _ in range(size):
-            m, f = queue.popleft()
-
-            if m == x and f == y:
-                return str(gen)
-            
-            if m+f <= x:
-                queue.append((m+f,f))
-            
-            if m+f <= y:
-                queue.append((m,m+f))
-
-        gen += 1
+    while min(x,y) != 1:
+        if max(x,y) % min(x,y) == 0:
+            return 'impossible'
+        
+        gen += max(x,y) / min(x,y)
+        x,y = max(x,y) % min(x,y), min(x,y)
     
-    return 'impossible'
+    return str(gen + max(x,y) - 1)
 
 
 if __name__ == '__main__':
